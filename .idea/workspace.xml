@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08483a0e-6232-415e-90e5-fc21466a79e4" name="Default Changelist" comment="" />
+    <list default="true" id="08483a0e-6232-415e-90e5-fc21466a79e4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Services/TerminalService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/terminal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +30,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="Laravel.SettingsForm" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -36,11 +42,33 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1595580700474</updated>
-      <workItem from="1595580701606" duration="303000" />
+      <workItem from="1595580701606" duration="952000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595580937334">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1595580937334" />
+    <state x="749" y="227" key="NewPhpClassDialog" timestamp="1595581106531">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="749" y="227" key="NewPhpClassDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1595581106531" />
+    <state x="794" y="439" key="NewPhpFileDialog" timestamp="1595581349545">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="794" y="439" key="NewPhpFileDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1595581349545" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1595581419325">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1595581419325" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1595581601762">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1595581601762" />
   </component>
 </project>
