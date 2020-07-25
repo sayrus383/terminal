@@ -16,8 +16,10 @@ class TerminalService
             'timeout'         => config('terminal.timeout'),
             'connect_timeout' => config('terminal.connect_timeout'),
             'headers'         => [
-                'Content-Type' => 'application/json',
-                'Accept'       => 'application/json'
+                'Content-Type'  => 'application/json; charset=utf-8',
+                'Accept'        => 'application/json',
+                'Authorization' => 'Basic ' . base64_encode(config('terminal.login') . ':' . config('terminal.password')),
+                'Api-key'       => config('terminal.api_key')
             ]
         ]);
     }
@@ -26,8 +28,10 @@ class TerminalService
     {
         try {
             $response = $this->client->post('insurance/api/get-verify-doc-list/');
-            dd($response->getBody()->getContents());
+            $response = json_decode($response->getBody()->getContents());
+            dd($response);
         } catch (BadResponseException $e) {
+            dump($e->getResponse()->getStatusCode());
             dd($e->getResponse()->getBody()->getContents());
         }
     }
