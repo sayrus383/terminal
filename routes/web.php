@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/', function () {
-    $terminalService = app(\App\Services\TerminalService::class);
-    $terminalService->send();
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

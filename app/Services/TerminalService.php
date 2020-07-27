@@ -4,6 +4,7 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
+use Illuminate\Support\Facades\Log;
 
 class TerminalService
 {
@@ -16,7 +17,7 @@ class TerminalService
             'timeout'         => config('terminal.timeout'),
             'connect_timeout' => config('terminal.connect_timeout'),
             'headers'         => [
-                'Content-Type'  => 'application/json; charset=utf-8',
+                'Content-Type'  => 'application/json',
                 'Accept'        => 'application/json',
                 'Authorization' => 'Basic ' . base64_encode(config('terminal.login') . ':' . config('terminal.password')),
                 'Api-key'       => config('terminal.api_key')
@@ -24,15 +25,14 @@ class TerminalService
         ]);
     }
 
-    public function send()
+    protected function send(string $url, array $params)
     {
         try {
-            $response = $this->client->post('insurance/api/get-verify-doc-list/');
-            $response = json_decode($response->getBody()->getContents());
-            dd($response);
+            $response = $this->client->post($url, $params);
+
+            return json_decode($response->getBody()->getContents());
         } catch (BadResponseException $e) {
-            dump($e->getResponse()->getStatusCode());
-            dd($e->getResponse()->getBody()->getContents());
+            Log::error($e->getResponse()->getBody()->getContents());
         }
     }
 }
