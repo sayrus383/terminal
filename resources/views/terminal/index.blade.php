@@ -18,7 +18,7 @@
                             <tr>
                                 <td>{{ $doc->document_type }}</td>
                                 <td>{{ $doc->reg_number }}</td>
-                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('Y:m:d H:i:s') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('H:i d/m/Y') }}</td>
                                 <td>
                                     <a href="{{ route('terminal.show', $doc->reg_number) }}" class="btn-sm btn-primary">Посмотреть</a>
                                 </td>

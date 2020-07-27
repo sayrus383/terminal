@@ -39,4 +39,9 @@ class VerifyDoc extends Model
     {
         return $this->belongsTo(User::class, 'manager_id');
     }
+
+    public function getPrettyCreatedAtAttribute()
+    {
+        return $this->created_at->format('H:i d/m/Y');
+    }
 }

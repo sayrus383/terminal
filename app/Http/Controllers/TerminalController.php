@@ -25,6 +25,6 @@ class TerminalController extends Controller
     {
         $verifyDoc = $this->terminalService->getVerifyDoc($regNumber);
 
-        dd($verifyDoc);
+        return view('terminal.show', compact('verifyDoc'));
     }
 }
