@@ -28,11 +28,20 @@ class TerminalService
     protected function send(string $url, array $params)
     {
         try {
-            $response = $this->client->post($url, $params);
+            $response = $this->client->post($url, [
+                'json' => $params
+            ]);
 
             return json_decode($response->getBody()->getContents());
         } catch (BadResponseException $e) {
             Log::error($e->getResponse()->getBody()->getContents());
         }
+    }
+
+    public function getVerifyDocs(int $page)
+    {
+        return $this->send('insurance/api/get-verify-doc-list', [
+            'page' => $page
+        ]);
     }
 }
