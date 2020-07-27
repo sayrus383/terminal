@@ -44,4 +44,11 @@ class TerminalService
             'page' => $page
         ]);
     }
+
+    public function getVerifyDoc(string $regNumber)
+    {
+        return $this->send('insurance/api/get-verify-doc', [
+            'reg_number' => $regNumber
+        ]);
+    }
 }

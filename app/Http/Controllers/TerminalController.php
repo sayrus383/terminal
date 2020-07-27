@@ -17,6 +17,14 @@ class TerminalController extends Controller
     public function index()
     {
         $docs = $this->terminalService->getVerifyDocs(1);
-        dd($docs);
+
+        return view('terminal.index', compact('docs'));
+    }
+
+    public function show($regNumber)
+    {
+        $doc = $this->terminalService->getVerifyDoc($regNumber);
+
+        dd($doc);
     }
 }
