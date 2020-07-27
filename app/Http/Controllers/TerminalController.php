@@ -23,8 +23,8 @@ class TerminalController extends Controller
 
     public function show($regNumber)
     {
-        $doc = $this->terminalService->getVerifyDoc($regNumber);
+        $verifyDoc = $this->terminalService->getVerifyDoc($regNumber);
 
-        dd($doc);
+        dd($verifyDoc);
     }
 }
