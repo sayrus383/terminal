@@ -6,33 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class VerifyDoc extends Model
 {
+    const TYPE_ID = 'ID';
+    const TYPE_VU = 'VU';
+    const TYPE_SRTS = 'SRTS';
+
     protected $fillable = [
         'reg_number',
         'document_type',
-        'name',
-        'surname',
-        'type_doc',
-        'pa_number',
-        'birthdate',
-        'sex_id',
-        'country_id',
-        'is_resident',
-        'barcode',
-        'pers_number',
         'doc_base64',
-        'issue_date',
-        'created_at',
-        'expired_at',
+        'data',
         'verified_at',
         'is_verified',
-        'manager_id'
+        'manager_id',
+        'image_path'
     ];
 
     protected $casts = [
-        'issue_date'  => 'date',
-        'birthdate'   => 'date',
-        'expired_at'  => 'date',
-        'verified_at' => 'date'
+        'verified_at' => 'date',
+        'data'        => 'array'
     ];
 
     public function manager()

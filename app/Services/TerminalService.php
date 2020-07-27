@@ -7,7 +7,10 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class TerminalService
 {
@@ -65,21 +68,20 @@ class TerminalService
             return VerifyDoc::create([
                 'reg_number'    => $doc->reg_number,
                 'document_type' => $doc->document_type,
-                'name'          => $doc->data->Name,
-                'surname'       => $doc->data->Surname,
-                'type_doc'      => $doc->data->TypeDoc,
-                'birthdate'     => Carbon::parse($doc->data->Birthdate),
-                'sex_id'        => $doc->data->SexID,
-                'country_id'    => $doc->data->CountryID,
-                'is_resident'   => $doc->data->IsRresident,
-                'barcode'       => $doc->data->Barcode,
-                'pers_number'   => $doc->data->PersNumber,
-                'pa_number'     => $doc->data->PaNumber,
-                'doc_base64'    => $doc->doc_base64,
-                'issue_date'    => Carbon::parse($doc->data->IssueDate),
-                'expired_at'    => Carbon::parse($doc->data->ExpDate),
-                'created_at'    => Carbon::parse($doc->created_at)
+                'data'          => $doc->data,
+                'created_at'    => Carbon::parse($doc->created_at),
+                'image_path'    => $this->saveBase64($doc->doc_base64)
             ]);
         });
+    }
+
+    protected function saveBase64(string $base64)
+    {
+        $destination = 'images/' . date('Y-m-d');
+
+        $imageName = Str::random(10) . '_' . time() . '.png';
+        Storage::disk('public')->put($destination . '/' . $imageName, base64_decode($base64));
+
+        return "/storage/public/$destination/" . $imageName;
     }
 }
