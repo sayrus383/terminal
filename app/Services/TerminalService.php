@@ -6,8 +6,8 @@ use App\VerifyDoc;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -51,14 +51,17 @@ class TerminalService
         }
     }
 
-    public function getVerifyDocs(int $page)
+    public function getVerifyDocs(Request $request): LengthAwarePaginator
     {
-        return $this->send('insurance/api/get-verify-doc-list', [
+        $page = $request->input('page') ?: 1;
+        $response = $this->send('insurance/api/get-verify-doc-list', [
             'page' => $page
         ]);
+
+        return new LengthAwarePaginator(collect($response->data), $response->total_pages, app()->isProduction() ? 30 : 2, $page);
     }
 
-    public function getVerifyDoc(string $regNumber)
+    public function getVerifyDoc(string $regNumber): VerifyDoc
     {
         return VerifyDoc::where('reg_number', $regNumber)->firstOr(function () use ($regNumber) {
             $doc = $this->send('insurance/api/get-verify-doc', [

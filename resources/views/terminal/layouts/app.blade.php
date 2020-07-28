@@ -35,14 +35,6 @@
                     </div>
                 </form>
                 <ul class="navbar-nav navbar-nav-right mr-0">
-{{--                    <li class="nav-item dropdown ml-4">--}}
-{{--                        <a class="nav-link count-indicator" href="{{ route('admin.tickets.index') }}">--}}
-{{--                            <i class="mdi mdi-bell-outline"></i>--}}
-{{--                            <span--}}
-{{--                                class="count bg-warning">{{ \App\Ticket::where(['status' => 'OPEN'])->count() }}</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
                            aria-expanded="false">
@@ -53,7 +45,7 @@
 
                             <a class="dropdown-item" href="{{ url('/logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                @lang('menus.logout')
+                                Выйти
                             </a>
 
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -70,8 +62,8 @@
         <div class="nav-bottom">
             <div class="container">
                 <ul class="nav page-navigation">
-                    <li class="nav-item {{ request()->getUri() == '' ? 'active' : null }}">
-                        <a href="{{ '/' }}" class="nav-link"><i
+                    <li class="nav-item {{ request()->route()->getName() === 'terminal.index' ? 'active' : null }}">
+                        <a href="{{ route('terminal.index') }}" class="nav-link"><i
                                 class="link-icon mdi mdi-television"></i><span
                                 class="menu-title">Заявки</span></a>
                     </li>

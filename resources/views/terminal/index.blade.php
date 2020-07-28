@@ -1,31 +1,62 @@
 @extends('terminal.layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Тип документа</th>
-                        <th scope="col">Регистрационный номер верификации</th>
-                        <th scope="col">Дата заявки</th>
-                        <th scope="col">Действие</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($docs->data as $doc)
-                            <tr>
-                                <td>{{ $doc->document_type }}</td>
-                                <td>{{ $doc->reg_number }}</td>
-                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('H:i d/m/Y') }}</td>
-                                <td>
-                                    <a href="{{ route('terminal.show', $doc->reg_number) }}" class="btn-sm btn-primary">Посмотреть</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Заявки для верификации</h4>
+
+                    <div class="col-12 table-responsive">
+                        <div class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row justify-content-center">
+                                <div class="col-sm-12">
+                                    <table class="table dataTable no-footer" role="grid"
+                                           aria-describedby="order-listing_info">
+                                        <thead>
+                                        <tr class="bg-light" role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="order-listing"
+                                                rowspan="1" colspan="1">
+                                                Тип документа
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="order-listing"
+                                                rowspan="1" colspan="1">
+                                                Регистрационный номер верификации
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="order-listing"
+                                                rowspan="1" colspan="1">
+                                                Дата заявки
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="order-listing"
+                                                rowspan="1" colspan="1">
+                                                Действие
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($docs as $doc)
+                                            <tr role="row" class="odd">
+                                                <td>{{ $doc->document_type }}</td>
+                                                <td>{{ $doc->reg_number }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('H:i d/m/Y') }}</td>
+
+                                                <td class="text-right">
+                                                    <a class="btn btn-light"
+                                                       href="{{ route('terminal.show', $doc->reg_number) }}">
+                                                        <i class="mdi mdi-eye text-primary"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                {{ $docs->links() }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
