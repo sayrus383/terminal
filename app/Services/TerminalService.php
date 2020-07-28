@@ -75,6 +75,16 @@ class TerminalService
         });
     }
 
+    public function verifyDoc(VerifyDoc $verifyDoc, string $comment = null)
+    {
+        return $this->send('insurance/api/set-verify-doc', [
+            'success'    => true,
+            'reg_number' => $verifyDoc->reg_number,
+            'comment'    => $comment,
+            'data'       => $verifyDoc->data
+        ]);
+    }
+
     protected function saveBase64(string $base64)
     {
         $destination = 'images/' . date('Y-m-d');
@@ -82,6 +92,6 @@ class TerminalService
         $imageName = Str::random(10) . '_' . time() . '.png';
         Storage::disk('public')->put($destination . '/' . $imageName, base64_decode($base64));
 
-        return "/storage/public/$destination/" . $imageName;
+        return "/storage/$destination/" . $imageName;
     }
 }

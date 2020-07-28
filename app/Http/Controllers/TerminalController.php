@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\TerminalService;
+use App\VerifyDoc;
 use Illuminate\Http\Request;
 
 class TerminalController extends Controller
@@ -26,5 +27,12 @@ class TerminalController extends Controller
         $verifyDoc = $this->terminalService->getVerifyDoc($regNumber);
 
         return view('terminal.show', compact('verifyDoc'));
+    }
+
+    public function verify(VerifyDoc $verifyDoc)
+    {
+        $this->terminalService->verifyDoc($verifyDoc);
+
+        return redirect()->route('terminal.index')->with('success', 'Заявка успешно закрыта');
     }
 }
