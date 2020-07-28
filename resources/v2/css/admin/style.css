@@ -19051,7 +19051,6 @@ html {
 
 .main-panel {
     min-height: calc(100vh - 70px);
-    width: 100%;
     padding-right: 12.5px;
     padding-left: 12.5px;
     margin-right: auto;
@@ -30115,26 +30114,8 @@ div.tagsinput span.tag a {
 /*# sourceMappingURL=maps/style.css.map */
 
 
-.main-panel {
-    max-width: 100%
-}
-
-.editormd .CodeMirror {
-    padding: 0 !important
-}
-
 body {
     font-weight: 400;
-}
-
-.upload-image {
-	display: none;
-
-}
-
-.editormd-dialog {
-    position: absolute !important;
-    top: 0 !important
 }
 
 .table td, .jsgrid .jsgrid-table td, .table th, .jsgrid .jsgrid-table th {
