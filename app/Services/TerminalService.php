@@ -78,10 +78,20 @@ class TerminalService
         });
     }
 
-    public function verifyDoc(VerifyDoc $verifyDoc, string $comment = null)
+    public function verifyDoc(VerifyDoc $verifyDoc)
     {
         return $this->send('insurance/api/set-verify-doc', [
             'success'    => true,
+            'reg_number' => $verifyDoc->reg_number,
+            'comment'    => null,
+            'data'       => $verifyDoc->data
+        ]);
+    }
+
+    public function refuseDoc(VerifyDoc $verifyDoc, $comment = null)
+    {
+        return $this->send('insurance/api/set-verify-doc', [
+            'success'    => false,
             'reg_number' => $verifyDoc->reg_number,
             'comment'    => $comment,
             'data'       => $verifyDoc->data

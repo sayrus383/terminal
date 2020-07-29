@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class VerifyDoc extends Model
 {
-    const TYPE_ID = 'ID';
-    const TYPE_VU = 'VU';
-    const TYPE_SRTS = 'SRTS';
-
     protected $fillable = [
         'reg_number',
         'document_type',

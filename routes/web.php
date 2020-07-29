@@ -9,5 +9,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'TerminalController@index')->name('index');
         Route::get('/{regNumber}', 'TerminalController@show')->name('show');
         Route::post('/docs/{verifyDoc}/verify', 'TerminalController@verify')->name('verify');
+        Route::post('/docs/{verifyDoc}/refuse', 'TerminalController@refuse')->name('refuse');
     });
 });
