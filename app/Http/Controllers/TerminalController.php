@@ -34,7 +34,7 @@ class TerminalController extends Controller
     public function verify(VerifyDoc $verifyDoc, Request $request)
     {
         if ($verifyDoc->is_verified || $verifyDoc->verified_at || $verifyDoc->manager_id) {
-            return redirect()->route('terminal.index')->with('success', 'Заявка уже закрыта');
+            return redirect()->route('terminal.index')->with('error', 'Заявка уже закрыта');
         }
 
         $verifyDoc->update([
@@ -46,7 +46,7 @@ class TerminalController extends Controller
 
         $this->terminalService->verifyDoc($verifyDoc);
 
-        return redirect()->route('terminal.index')->with('error', 'Заявка успешно закрыта');
+        return redirect()->route('terminal.index')->with('success', 'Заявка успешно закрыта');
     }
 
     public function refuse(VerifyDoc $verifyDoc, RefuseRequest $request)
@@ -63,6 +63,6 @@ class TerminalController extends Controller
 
         $this->terminalService->refuseDoc($verifyDoc, $request->input('comments'));
 
-        return redirect()->route('terminal.index')->with('error', 'Заявка отказана');
+        return redirect()->route('terminal.index')->with('success', 'Заявка отказана');
     }
 }
