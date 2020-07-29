@@ -66,6 +66,7 @@
                                         <div class="form-group">
                                             <label>{{ trans("fields.$name") }}</label>
                                             <input type="text" class="form-control"
+                                                   {{ $verifyDoc->is_verified ? 'disabled' : null }}
                                                    name="{{ $name }}" value="{{ $value }}">
                                         </div>
                                         @break
@@ -73,11 +74,19 @@
                                 @endforeach
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success">Верифицировать</button>
+                                    @if (is_null($verifyDoc->manager_id))
+                                        @if ($verifyDoc->is_verified)
+                                            <button type="button" class="btn btn-success">Подтверждено</button>
+                                        @else
+                                            <button type="submit" class="btn btn-success">Верифицировать</button>
+                                        @endif
 
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#refuseModal">Отказать
-                                    </button>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#refuseModal">Отказать
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-primary">Заявка закрыта</button>
+                                    @endif
                                 </div>
                             </form>
                         </div>
