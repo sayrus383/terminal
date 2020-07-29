@@ -30185,3 +30185,11 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
+.image-zoom > ol, ul {
+    font-size: 0;
+}
+
+.main-panel {
+    max-width: 100%;
+}

@@ -59,17 +59,6 @@
                 </button>
             </div>
         </div>
-        <div class="nav-bottom">
-            <div class="container">
-                <ul class="nav page-navigation">
-                    <li class="nav-item {{ request()->route()->getName() === 'terminal.index' ? 'active' : null }}">
-                        <a href="{{ route('terminal.index') }}" class="nav-link"><i
-                                class="link-icon mdi mdi-television"></i><span
-                                class="menu-title">Заявки</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </nav>
 
     <!-- partial -->
