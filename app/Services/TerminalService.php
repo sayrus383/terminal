@@ -58,7 +58,7 @@ class TerminalService
             'page' => $page
         ]);
 
-        return new LengthAwarePaginator(collect($response->data), $response->total_pages, app()->isProduction() ? 30 : 2, $page);
+        return new LengthAwarePaginator(collect($response->data), $response->total_pages, 30, $page);
     }
 
     public function getVerifyDoc(string $regNumber): VerifyDoc
