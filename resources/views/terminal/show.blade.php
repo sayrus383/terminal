@@ -62,6 +62,18 @@
                                             </select>
                                         </div>
                                         @break
+                                        @case('Type')
+                                        <div class="form-group">
+                                            <label>{{ trans("fields.$name") }}</label>
+                                            <select class="form-control" name="{{ $name }}">
+                                                @foreach($tfTypes as $tfType)
+                                                    <option {{ $value == $tfType->id ? 'selected' : null }} value="{{ $tfType->id }}">
+                                                        {{ $tfType->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @break
                                         @default
                                         <div class="form-group">
                                             <label>{{ trans("fields.$name") }}</label>

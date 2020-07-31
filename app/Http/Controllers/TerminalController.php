@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Terminal\RefuseRequest;
 use App\Services\TerminalService;
+use App\TfType;
 use App\VerifyDoc;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,8 +28,9 @@ class TerminalController extends Controller
     public function show($regNumber)
     {
         $verifyDoc = $this->terminalService->getVerifyDoc($regNumber);
+        $tfTypes = TfType::all();
 
-        return view('terminal.show', compact('verifyDoc'));
+        return view('terminal.show', compact('verifyDoc', 'tfTypes'));
     }
 
     public function verify(VerifyDoc $verifyDoc, Request $request)
