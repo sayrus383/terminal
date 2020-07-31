@@ -46,7 +46,7 @@ class TerminalController extends Controller
 
         $this->terminalService->verifyDoc($verifyDoc);
 
-        return redirect()->route('terminal.index')->with('success', 'Заявка успешно закрыта');
+        return redirect()->back()->with('success', 'Заявка успешно закрыта');
     }
 
     public function refuse(VerifyDoc $verifyDoc, RefuseRequest $request)
@@ -63,6 +63,6 @@ class TerminalController extends Controller
 
         $this->terminalService->refuseDoc($verifyDoc, $request->input('comments'));
 
-        return redirect()->route('terminal.index')->with('success', 'Заявка отказана');
+        return redirect()->back()->with('success', 'Заявка отказана');
     }
 }
