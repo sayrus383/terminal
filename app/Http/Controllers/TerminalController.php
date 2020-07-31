@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Http\Requests\Terminal\RefuseRequest;
 use App\Services\TerminalService;
 use App\TfType;
@@ -29,8 +30,9 @@ class TerminalController extends Controller
     {
         $verifyDoc = $this->terminalService->getVerifyDoc($regNumber);
         $tfTypes = TfType::all();
+        $countries = Country::all();
 
-        return view('terminal.show', compact('verifyDoc', 'tfTypes'));
+        return view('terminal.show', compact('verifyDoc', 'tfTypes', 'countries'));
     }
 
     public function verify(VerifyDoc $verifyDoc, Request $request)

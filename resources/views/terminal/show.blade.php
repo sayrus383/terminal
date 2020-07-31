@@ -74,6 +74,18 @@
                                             </select>
                                         </div>
                                         @break
+                                        @case('CountryID')
+                                        <div class="form-group">
+                                            <label>{{ trans("fields.$name") }}</label>
+                                            <select class="form-control" name="{{ $name }}">
+                                                @foreach($countries as $country)
+                                                    <option {{ $value == $country->id ? 'selected' : null }} value="{{ $country->id }}">
+                                                        {{ $country->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @break
                                         @default
                                         <div class="form-group">
                                             <label>{{ trans("fields.$name") }}</label>
