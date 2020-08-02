@@ -21,10 +21,6 @@
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="order-listing"
                                                 rowspan="1" colspan="1">
-                                                Регистрационный номер верификации
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="order-listing"
-                                                rowspan="1" colspan="1">
                                                 Дата заявки
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="order-listing"
@@ -37,8 +33,7 @@
                                         @foreach($docs as $doc)
                                             <tr role="row" class="odd">
                                                 <td>{{ $doc->document_type }}</td>
-                                                <td>{{ $doc->reg_number }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('H:i d/m/Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('d.m.Y H:i:s') }}</td>
 
                                                 <td class="text-right">
                                                     <a class="btn btn-light"

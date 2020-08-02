@@ -52,49 +52,67 @@
                                 </div>
 
                                 @foreach($verifyDoc->data as $name => $value)
-                                    @switch($name)
-                                        @case('SexID')
-                                        <div class="form-group">
-                                            <label>{{ trans("fields.$name") }}</label>
-                                            <select class="form-control" name="{{ $name }}">
-                                                <option {{ $value == 1 ? 'selected' : null }} value="1">Мужской</option>
-                                                <option {{ $value == 2 ? 'selected' : null }} value="2">Женский</option>
-                                            </select>
-                                        </div>
-                                        @break
-                                        @case('Type')
-                                        <div class="form-group">
-                                            <label>{{ trans("fields.$name") }}</label>
-                                            <select class="form-control" name="{{ $name }}">
-                                                @foreach($tfTypes as $tfType)
-                                                    <option {{ $value == $tfType->id ? 'selected' : null }} value="{{ $tfType->id }}">
-                                                        {{ $tfType->name }}
+                                    @if (in_array($name, \App\Services\TerminalService::VISIBLE_INPUTS))
+                                        @switch($name)
+                                            @case('IssueDate')
+                                            <div class="form-group">
+                                                <label>{{ trans("fields.$name") }}</label>
+                                                <input type="date" class="form-control"
+                                                       {{ $verifyDoc->is_verified ? 'disabled' : null }}
+                                                       name="{{ $name }}" value="{{ \Carbon\Carbon::parse($value)->format('Y-m-d') }}">
+                                            </div>
+                                            @break
+                                            @case('SexID')
+                                            <div class="form-group">
+                                                <label>{{ trans("fields.$name") }}</label>
+                                                <select class="form-control" name="{{ $name }}">
+                                                    <option {{ $value == 1 ? 'selected' : null }} value="1">Мужской
                                                     </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @break
-                                        @case('CountryID')
-                                        <div class="form-group">
-                                            <label>{{ trans("fields.$name") }}</label>
-                                            <select class="form-control" name="{{ $name }}">
-                                                @foreach($countries as $country)
-                                                    <option {{ $value == $country->id ? 'selected' : null }} value="{{ $country->id }}">
-                                                        {{ $country->name }}
+                                                    <option {{ $value == 2 ? 'selected' : null }} value="2">Женский
                                                     </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @break
-                                        @default
-                                        <div class="form-group">
-                                            <label>{{ trans("fields.$name") }}</label>
-                                            <input type="text" class="form-control"
-                                                   {{ $verifyDoc->is_verified ? 'disabled' : null }}
-                                                   name="{{ $name }}" value="{{ $value }}">
-                                        </div>
-                                        @break
-                                    @endswitch
+                                                </select>
+                                            </div>
+                                            @break
+                                            @case('Type')
+                                            <div class="form-group">
+                                                <label>{{ trans("fields.$name") }}</label>
+                                                <select class="form-control" name="{{ $name }}">
+                                                    @foreach($tfTypes as $tfType)
+                                                        <option
+                                                            {{ $value == $tfType->id ? 'selected' : null }} value="{{ $tfType->id }}">
+                                                            {{ $tfType->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @break
+                                            @case('CountryID')
+                                            <div class="form-group">
+                                                <label>{{ trans("fields.$name") }}</label>
+                                                <select class="form-control" name="{{ $name }}">
+                                                    @foreach($countries as $country)
+                                                        <option
+                                                            {{ $value == $country->id ? 'selected' : null }} value="{{ $country->id }}">
+                                                            {{ $country->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @break
+                                            @default
+                                            <div class="form-group">
+                                                <label>{{ trans("fields.$name") }}</label>
+                                                <input type="text" class="form-control"
+                                                       {{ $verifyDoc->is_verified ? 'disabled' : null }}
+                                                       name="{{ $name }}" value="{{ $value }}">
+                                            </div>
+                                            @break
+                                        @endswitch
+                                    @else
+                                        <input type="hidden" class="form-control"
+                                               {{ $verifyDoc->is_verified ? 'disabled' : null }}
+                                               name="{{ $name }}" value="{{ $value }}">
+                                    @endif
                                 @endforeach
 
                                 <div class="form-group">

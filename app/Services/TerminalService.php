@@ -16,6 +16,24 @@ class TerminalService
 {
     protected $client;
 
+    public const VISIBLE_INPUTS = [
+        'Name',
+        'Surname',
+        'Birthdate',
+        'PaNumber',
+        'CountryID',
+
+        'Marka',
+        'Model',
+        'Type',
+        'Year',
+        'GRNZ',
+
+        'Name',
+        'Surname',
+        'IssueDate'
+    ];
+
     public function __construct()
     {
         $this->client = new Client([
