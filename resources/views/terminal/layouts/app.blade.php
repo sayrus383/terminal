@@ -21,67 +21,69 @@
 
 <body>
 <div class="container-scroller">
-    <!-- partial:../../partials/_horizontal-navbar.html -->
-    <nav class="navbar horizontal-layout col-lg-12 col-12 p-0">
-        <div class="container d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-top">
-                <a class="navbar-brand brand-logo" href="{{ route('terminal.index') }}">
-                    {{ config('app.name') }}
-                </a>
-            </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center">
-                <form class="search-field ml-auto" action="#">
-                    <div class="form-group mb-0">
-                    </div>
-                </form>
-                <ul class="navbar-nav navbar-nav-right mr-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
-                           aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="https://placehold.it/100x100" alt="Profile image">
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                            <a class="dropdown-item"></a>
-
-                            <a class="dropdown-item" href="{{ url('/logout') }}"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Выйти
-                            </a>
-
-                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
+    @if(auth()->check())
+        <nav class="navbar horizontal-layout col-lg-12 col-12 p-0">
+            <div class="container d-flex flex-row">
+                <div class="text-center navbar-brand-wrapper d-flex align-items-top">
+                    <a class="navbar-brand brand-logo" href="{{ route('terminal.index') }}">
+                        {{ config('app.name') }}
+                    </a>
+                </div>
+                <div class="navbar-menu-wrapper d-flex align-items-center">
+                    <form class="search-field ml-auto" action="#">
+                        <div class="form-group mb-0">
                         </div>
-                    </li>
-                </ul>
-                <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                    <span class="mdi mdi-menu"></span>
-                </button>
-            </div>
-        </div>
-    </nav>
+                    </form>
+                    <ul class="navbar-nav navbar-nav-right mr-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img class="img-xs rounded-circle" src="https://placehold.it/100x100"
+                                     alt="Profile image">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                 aria-labelledby="UserDropdown">
+                                <a class="dropdown-item"></a>
 
-    <!-- partial -->
+                                <a class="dropdown-item" href="{{ url('/logout') }}"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Выйти
+                                </a>
+
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="mdi mdi-menu"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    @endif
+
     <div class="container-fluid page-body-wrapper">
         <div class="main-panel">
             <div class="content-wrapper">
                 @yield('content')
             </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:../../partials/_footer.html -->
-            <footer class="footer">
-                <div class="container-fluid clearfix">
+
+            @if(auth()->check())
+                <footer class="footer">
+                    <div class="container-fluid clearfix">
                     <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © {{ date('Y') }} <a
                             href="{{ config('app.url') }}" target="_blank">{{ config('app.name') }}</a></span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">made with <i
-                            class="mdi mdi-heart text-danger"></i></span>
-                </div>
-            </footer>
-            <!-- partial -->
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">made with <i
+                                class="mdi mdi-heart text-danger"></i></span>
+                    </div>
+                </footer>
+            @endif
         </div>
         <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
 </div>
 
 <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
