@@ -9,6 +9,7 @@ use App\TfType;
 use App\VerifyDoc;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TerminalController extends Controller
 {
@@ -47,6 +48,8 @@ class TerminalController extends Controller
             return redirect()->route('terminal.index')->with('error', 'Заявка уже закрыта');
         }
 
+        DB::beginTransaction();
+
         $verifyDoc->update([
             'data'        => $request->except('_token'),
             'verified_at' => Carbon::now(),
@@ -55,6 +58,8 @@ class TerminalController extends Controller
         ]);
 
         $this->terminalService->verifyDoc($verifyDoc);
+
+        DB::commit();
 
         return redirect()->back()->with('success', 'Заявка успешно закрыта');
     }
@@ -65,6 +70,8 @@ class TerminalController extends Controller
             return redirect()->route('terminal.index')->with('error', 'Заявка уже закрыта');
         }
 
+        DB::beginTransaction();
+
         $verifyDoc->update([
             'verified_at' => Carbon::now(),
             'is_verified' => false,
@@ -72,6 +79,8 @@ class TerminalController extends Controller
         ]);
 
         $this->terminalService->refuseDoc($verifyDoc, $request->input('comments'));
+
+        DB::commit();
 
         return redirect()->back()->with('success', 'Заявка отказана');
     }
