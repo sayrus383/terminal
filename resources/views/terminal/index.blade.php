@@ -32,7 +32,7 @@
                                         <tbody>
                                         @foreach($docs as $doc)
                                             <tr role="row" class="odd">
-                                                <td>{{ $doc->document_type }}</td>
+                                                <td>{{ trans("fields.$doc->document_type") }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('d.m.Y H:i:s') }}</td>
 
                                                 <td class="text-right">
