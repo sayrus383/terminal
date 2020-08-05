@@ -55,4 +55,6 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" value="{{ $channel }}" id="channel">
 @endsection

@@ -89,7 +89,7 @@
 <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
 <script src="/assets/vendors/js/vendor.bundle.addons.js"></script>
 
-<script src="{{ mix('v2/js/admin/app.min.js') }}"></script>
+<script src="{{ mix('v2/js/admin/app.min.js') }}" type="module"></script>
 
 <script>
 

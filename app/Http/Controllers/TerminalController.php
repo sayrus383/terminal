@@ -22,9 +22,11 @@ class TerminalController extends Controller
 
     public function index(Request $request)
     {
+        $channel = $this->wsChannel('verifyDoc', false);
+
         $docs = $this->terminalService->getVerifyDocs($request);
 
-        return view('terminal.index', compact('docs'));
+        return view('terminal.index', compact('docs', 'channel'));
     }
 
     public function show($regNumber)
@@ -83,5 +85,14 @@ class TerminalController extends Controller
         DB::commit();
 
         return redirect()->back()->with('success', 'Заявка отказана');
+    }
+
+    private function wsChannel(string $channel, bool $single = false, bool $secret = true): string
+    {
+        $salt = $secret ? uniqid() : 'public';
+        $single = $single ? 1 : 0;
+        $key = crypt("$channel:$single:$salt", '1rg2kqoh0dpdqsr1kr7r562d1b');
+
+        return "$channel:$single:$salt:$key";
     }
 }

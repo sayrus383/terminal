@@ -16,6 +16,7 @@ mix.combine([
     'resources/v2/js/admin/template.js',
     'resources/v2/js/admin/desktop-notification.js',
     'resources/v2/js/admin/viewer.js',
+    'resources/v2/js/admin/webSocket.js',
 
     'resources/v2/js/admin/admin.js',
 
