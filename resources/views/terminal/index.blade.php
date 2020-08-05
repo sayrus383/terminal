@@ -36,10 +36,16 @@
                                                 <td>{{ \Carbon\Carbon::parse($doc->created_at)->format('d.m.Y H:i:s') }}</td>
 
                                                 <td class="text-right">
-                                                    <a class="btn btn-light"
-                                                       href="{{ route('terminal.show', $doc->reg_number) }}">
-                                                        <i class="mdi mdi-eye text-primary"></i>
-                                                    </a>
+                                                    @if(in_array($doc->reg_number, $attachVerifyDocs))
+                                                        <button class="btn btn-warning">
+                                                            Рассматривается...
+                                                        </button>
+                                                    @else
+                                                        <a class="btn btn-primary"
+                                                           href="{{ route('terminal.show', $doc->reg_number) }}">
+                                                            Посмотреть
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

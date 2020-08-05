@@ -13,12 +13,14 @@ class VerifyDoc extends Model
         'data',
         'verified_at',
         'is_verified',
+        'attached_at',
         'manager_id',
         'image_path'
     ];
 
     protected $casts = [
         'verified_at' => 'date',
+        'attached_at' => 'date',
         'data'        => 'array'
     ];
 

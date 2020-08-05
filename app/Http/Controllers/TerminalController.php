@@ -23,10 +23,13 @@ class TerminalController extends Controller
     public function index(Request $request)
     {
         $channel = $this->wsChannel('verifyDoc', false);
-
         $docs = $this->terminalService->getVerifyDocs($request);
 
-        return view('terminal.index', compact('docs', 'channel'));
+        $attachVerifyDocs = VerifyDoc::whereNotNull('attached_at')
+            ->where('attached_at', '>=', Carbon::now())
+            ->select('reg_number')->pluck('reg_number')->toArray();
+
+        return view('terminal.index', compact('docs', 'channel', 'attachVerifyDocs'));
     }
 
     public function show($regNumber)
@@ -34,6 +37,14 @@ class TerminalController extends Controller
         $verifyDoc = $this->terminalService->getVerifyDoc($regNumber);
         $tfTypes = TfType::all();
         $countries = Country::all();
+
+        if ($verifyDoc->attached_at && $verifyDoc->attached_at->gt(Carbon::now())) {
+            return redirect()->route('terminal.index')->with('error', 'Заявка уже  рассматривается');
+        }
+
+        $verifyDoc->update([
+            'attached_at' => Carbon::now()->addSeconds(30)
+        ]);
 
         return view('terminal.show', compact('verifyDoc', 'tfTypes', 'countries'));
     }
