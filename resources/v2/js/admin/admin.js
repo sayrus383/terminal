@@ -1,11 +1,11 @@
 webSocket().then(socket => {
     let channel = $('#channel');
 
-    if (channel.length) {
-        socket.on(channel.val(), verifyDoc => {
-            console.log(verifyDoc);
-        });
-    }
+    // if (channel.length) {
+    //     socket.on(channel.val(), verifyDoc => {
+    //         console.log(verifyDoc);
+    //     });
+    // }
 
 
     // const timer = setTimeout(() => {
