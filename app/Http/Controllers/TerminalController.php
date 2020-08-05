@@ -63,7 +63,7 @@ class TerminalController extends Controller
 
         DB::commit();
 
-        return redirect()->back()->with('success', 'Заявка успешно закрыта');
+        return redirect()->route('terminal.index')->with('success', 'Заявка успешно закрыта');
     }
 
     public function refuse(VerifyDoc $verifyDoc, RefuseRequest $request)
@@ -84,7 +84,7 @@ class TerminalController extends Controller
 
         DB::commit();
 
-        return redirect()->back()->with('success', 'Заявка отказана');
+        return redirect()->route('terminal.index')->with('success', 'Заявка отказана');
     }
 
     private function wsChannel(string $channel, bool $single = false, bool $secret = true): string

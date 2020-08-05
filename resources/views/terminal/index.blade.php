@@ -29,7 +29,7 @@
                                             </th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="verifyDocs">
                                         @foreach($docs as $doc)
                                             <tr role="row" class="odd">
                                                 <td>{{ trans("fields.$doc->document_type") }}</td>

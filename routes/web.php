@@ -4,11 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/test', function () {
-    $user = \App\User::first();
-    $user->notify(new \App\Notifications\PusherX('verifyDoc', ['reg_number' => 'qwfdefwe']));
-});
-
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['as' => 'terminal.'], function () {
         Route::get('/', 'TerminalController@index')->name('index');
