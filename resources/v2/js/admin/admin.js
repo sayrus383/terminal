@@ -167,7 +167,6 @@
 
             webSocket().then(socket => {
                 socket.on(channel.val(), verifyDoc => {
-                    console.log(verifyDoc)
                     verifyDocs.prepend('                                            <tr role="row" class="odd" id="verifyDocs">\n' +
                         '                                                <td>' + verifyDoc.document_type + '</td>\n' +
                         '                                                <td>' + verifyDoc.created_at + '</td>\n' +
