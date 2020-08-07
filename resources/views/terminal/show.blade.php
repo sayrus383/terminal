@@ -62,6 +62,14 @@
                                                        name="{{ $name }}" value="{{ \Carbon\Carbon::parse($value)->format('Y-m-d') }}">
                                             </div>
                                             @break
+                                            @case('Birthdate')
+                                            <div class="form-group">
+                                                <label>{{ trans("fields.$name") }}</label>
+                                                <input type="date" class="form-control"
+                                                       {{ $verifyDoc->is_verified ? 'disabled' : null }}
+                                                       name="{{ $name }}" value="{{ \Carbon\Carbon::parse($value)->format('Y-m-d') }}">
+                                            </div>
+                                            @break
                                             @case('SexID')
                                             <div class="form-group">
                                                 <label>{{ trans("fields.$name") }}</label>
@@ -155,7 +163,7 @@
 
                         <div class="form-group">
                             <label class="col-form-label">Комментарии:</label>
-                            <textarea class="form-control" name="comments"></textarea>
+                            <textarea class="form-control" name="comments" required></textarea>
                         </div>
 
                         <div class="modal-footer">

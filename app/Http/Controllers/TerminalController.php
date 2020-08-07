@@ -53,7 +53,8 @@ class TerminalController extends Controller
     {
         if ($request->input('IssueDate', null) !== null) {
             $request->merge([
-                'IssueDate' => Carbon::parse($request->input('IssueDate'))->format('d.m.Y')
+                'IssueDate' => Carbon::parse($request->input('IssueDate'))->format('d.m.Y'),
+                'Birthdate' => Carbon::parse($request->input('Birthdate'))->format('d.m.Y'),
             ]);
         }
 
