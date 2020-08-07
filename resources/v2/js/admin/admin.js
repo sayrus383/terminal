@@ -167,14 +167,14 @@
 
             webSocket().then(socket => {
                 socket.on(channel.val(), verifyDoc => {
-                    verifyDocs.prepend('                                            <tr role="row" class="odd" id="verifyDocs">\n' +
+                    verifyDocs.append('                                            <tr role="row" class="odd" id="verifyDocs">\n' +
                         '                                                <td>' + verifyDoc.document_type + '</td>\n' +
                         '                                                <td>' + verifyDoc.created_at + '</td>\n' +
                         '\n' +
                         '                                                <td class="text-right">\n' +
-                        '                                                    <a class="btn btn-light"\n' +
+                        '                                                    <a class="btn btn-primary"\n' +
                         '                                                       href="' + verifyDoc.url + '">\n' +
-                        '                                                        <i class="mdi mdi-eye text-primary"></i>\n' +
+                        '                                                        Посмотреть' +
                         '                                                    </a>\n' +
                         '                                                </td>\n' +
                         '                                            </tr>')
