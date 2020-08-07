@@ -146,7 +146,7 @@
 
         function webSocket() {
             if (!wsocket) {
-                wsocket = new WSocket(`ws://127.0.0.1:8001/socket`);
+                wsocket = new WSocket(`ws://${location.host}:8001/socket`);
                 wsocket.connect({
                     delay: 3000,
                     reconnectLimit: 60,
