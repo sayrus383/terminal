@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Country;
 use App\Http\Requests\Terminal\RefuseRequest;
+use App\Notifications\PusherX;
 use App\Services\TerminalService;
 use App\TfType;
+use App\User;
 use App\VerifyDoc;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class TerminalController extends Controller
 {
@@ -22,14 +25,15 @@ class TerminalController extends Controller
 
     public function index(Request $request)
     {
-        $channel = $this->wsChannel('verifyDoc', false);
+        $channelVerifyDoc = $this->wsChannel('channelVerifyDoc', false);
+        $channelOpen = $this->wsChannel('channelOpen', false);
         $docs = $this->terminalService->getVerifyDocs($request);
 
         $attachVerifyDocs = VerifyDoc::whereNotNull('attached_at')
             ->where('attached_at', '>=', Carbon::now())
             ->select('reg_number')->pluck('reg_number')->toArray();
 
-        return view('terminal.index', compact('docs', 'channel', 'attachVerifyDocs'));
+        return view('terminal.index', compact('docs', 'channelOpen', 'channelVerifyDoc', 'attachVerifyDocs'));
     }
 
     public function show($regNumber)
@@ -37,6 +41,10 @@ class TerminalController extends Controller
         $verifyDoc = $this->terminalService->getVerifyDoc($regNumber);
         $tfTypes = TfType::all();
         $countries = Country::all();
+
+        Notification::send(User::all(), new PusherX('channelOpen', [
+            "reg_number" => $verifyDoc->reg_number,
+        ]));
 
         if ($verifyDoc->attached_at && $verifyDoc->attached_at->gt(Carbon::now())) {
             return redirect()->route('terminal.index')->with('error', 'Заявка уже  рассматривается');

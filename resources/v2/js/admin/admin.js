@@ -161,18 +161,19 @@
             };
         }
 
-        let channel = $('#channel');
-        if (channel.length) {
+        let channelVerifyDoc = $('#channelVerifyDoc');
+        if (channelVerifyDoc.length) {
             let verifyDocs = $('#verifyDocs');
 
             webSocket().then(socket => {
-                socket.on(channel.val(), verifyDoc => {
+                socket.on(channelVerifyDoc.val(), verifyDoc => {
                     verifyDocs.append('                                            <tr role="row" class="odd" id="verifyDocs">\n' +
                         '                                                <td>' + verifyDoc.document_type + '</td>\n' +
                         '                                                <td>' + verifyDoc.created_at + '</td>\n' +
                         '\n' +
                         '                                                <td class="text-right">\n' +
                         '                                                    <a class="btn btn-primary"\n' +
+                        '                                                          id="open-'+ verifyDoc.reg_number +'"' +
                         '                                                       href="' + verifyDoc.url + '">\n' +
                         '                                                        Посмотреть' +
                         '                                                    </a>\n' +
@@ -182,5 +183,13 @@
             });
         }
 
+        let channelOpen = $('#channelOpen');
+        if (channelOpen.length) {
+            webSocket().then(socket => {
+                socket.on(channelOpen.val(), verifyDoc => {
+                    $('#open-' + verifyDoc.reg_number).removeClass('btn-primary').addClass('btn-warning').text('Рассматривается...');
+                });
+            });
+        }
     });
 })(jQuery)

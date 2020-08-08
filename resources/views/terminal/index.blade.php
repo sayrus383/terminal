@@ -42,6 +42,7 @@
                                                         </button>
                                                     @else
                                                         <a class="btn btn-primary"
+                                                           id="open-{{ $doc->reg_number }}"
                                                            href="{{ route('terminal.show', $doc->reg_number) }}">
                                                             Посмотреть
                                                         </a>
@@ -62,5 +63,6 @@
         </div>
     </div>
 
-    <input type="hidden" value="{{ $channel }}" id="channel">
+    <input type="hidden" value="{{ $channelVerifyDoc }}" id="channelVerifyDoc">
+    <input type="hidden" value="{{ $channelOpen }}" id="channelOpen">
 @endsection

@@ -13,8 +13,8 @@ class TerminalController extends Controller
 {
     public function store(StoreRequest $request)
     {
-        $users = User::all();
-        Notification::send($users, new PusherX('verifyDoc', [
+        Notification::send(User::all(), new PusherX('channelVerifyDoc', [
+            "reg_number"    => $request->input('reg_number'),
             "created_at"    => Carbon::parse($request->input('created_at'))->format('d.m.Y H:i:s'),
             "document_type" => trans('fields.' . $request->input('document_type')),
             "url"           => route('terminal.show', $request->input('reg_number'))
