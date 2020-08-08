@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <form method="POST" action="{{ route('terminal.verify', $verifyDoc) }}">
+                            <form method="POST" action="{{ route('terminal.verify', $verifyDoc) }}" class="js-verify-doc">
                                 @csrf
 
                                 <div class="form-group">
@@ -184,6 +184,10 @@
             viewed() {
                 viewer.zoomTo(1);
             },
+        });
+
+        $('.js-verify-doc').on("submit", function () {
+            return confirm('Вы уверены что хотите верифицировать документ ?');
         });
     </script>
 @endpush
