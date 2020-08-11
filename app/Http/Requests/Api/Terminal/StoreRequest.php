@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'created_at'    => 'required',
-            'reg_number'    => 'required',
+            'reg_number'    => 'required|unique:verify_docs',
             'document_type' => 'required',
         ];
     }

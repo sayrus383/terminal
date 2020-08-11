@@ -62,9 +62,21 @@ class TerminalController extends Controller
         if ($request->input('IssueDate', null) !== null) {
             $request->merge([
                 'IssueDate' => Carbon::parse($request->input('IssueDate'))->format('d.m.Y'),
+            ]);
+        }
+
+        if ($request->input('IssueDate', null) !== null) {
+            $request->merge([
                 'Birthdate' => Carbon::parse($request->input('Birthdate'))->format('d.m.Y'),
             ]);
         }
+
+        if ($request->input('IsRresident', null) !== null) {
+            $request->merge([
+                'IsRresident' => $request->input('IsRresident') ? true : false
+            ]);
+        }
+
 
         if ($verifyDoc->is_verified || $verifyDoc->verified_at || $verifyDoc->manager_id) {
             return redirect()->route('terminal.index')->with('error', 'Заявка уже закрыта');
