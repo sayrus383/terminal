@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Country;
 use App\Http\Requests\Terminal\RefuseRequest;
+use App\Http\Requests\Terminal\VerifyRequest;
 use App\Notifications\PusherX;
 use App\Services\TerminalService;
 use App\TfType;
@@ -57,27 +58,8 @@ class TerminalController extends Controller
         return view('terminal.show', compact('verifyDoc', 'tfTypes', 'countries'));
     }
 
-    public function verify(VerifyDoc $verifyDoc, Request $request)
+    public function verify(VerifyDoc $verifyDoc, VerifyRequest $request)
     {
-        if ($request->input('IssueDate', null) !== null) {
-            $request->merge([
-                'IssueDate' => Carbon::parse($request->input('IssueDate'))->format('d.m.Y'),
-            ]);
-        }
-
-        if ($request->input('IssueDate', null) !== null) {
-            $request->merge([
-                'Birthdate' => Carbon::parse($request->input('Birthdate'))->format('d.m.Y'),
-            ]);
-        }
-
-        if ($request->input('IsRresident', null) !== null) {
-            $request->merge([
-                'IsRresident' => $request->input('IsRresident') ? true : false
-            ]);
-        }
-
-
         if ($verifyDoc->is_verified || $verifyDoc->verified_at || $verifyDoc->manager_id) {
             return redirect()->route('terminal.index')->with('error', 'Заявка уже закрыта');
         }
