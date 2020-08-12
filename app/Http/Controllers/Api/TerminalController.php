@@ -16,12 +16,16 @@ class TerminalController extends Controller
     {
         $terminalService->getVerifyDoc($request->input('reg_number'));
 
-        Notification::send(User::all(), new PusherX('channelVerifyDoc', [
-            "reg_number"    => $request->input('reg_number'),
-            "created_at"    => Carbon::parse($request->input('created_at'))->format('d.m.Y H:i:s'),
-            "document_type" => trans('fields.' . $request->input('document_type')),
-            "url"           => route('terminal.show', $request->input('reg_number'))
-        ]));
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $user->notify(new PusherX("channelVerifyDoc$user->id", [
+                "reg_number"    => $request->input('reg_number'),
+                "created_at"    => Carbon::parse($request->input('created_at'))->format('d.m.Y H:i:s'),
+                "document_type" => trans('fields.' . $request->input('document_type')),
+                "url"           => route('terminal.show', $request->input('reg_number'))
+            ]));
+        }
 
         return response()->noContent();
     }

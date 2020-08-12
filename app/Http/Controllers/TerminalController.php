@@ -26,8 +26,8 @@ class TerminalController extends Controller
 
     public function index(Request $request)
     {
-        $channelVerifyDoc = $this->wsChannel('channelVerifyDoc', false);
-        $channelOpen = $this->wsChannel('channelOpen', false);
+        $channelVerifyDoc = $this->wsChannel('channelVerifyDoc' . auth()->id(), false);
+        $channelOpen = $this->wsChannel('channelOpen' . auth()->id(), false);
         $docs = $this->terminalService->getVerifyDocs($request);
 
         $attachVerifyDocs = VerifyDoc::whereNotNull('attached_at')
@@ -43,9 +43,13 @@ class TerminalController extends Controller
         $tfTypes = TfType::all();
         $countries = Country::all();
 
-        Notification::send(User::all(), new PusherX('channelOpen', [
-            "reg_number" => $verifyDoc->reg_number,
-        ]));
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $user->notify(new PusherX('channelOpen' . auth()->id(), [
+                "reg_number" => $verifyDoc->reg_number,
+            ]));
+        }
 
         if ($verifyDoc->attached_at && $verifyDoc->attached_at->gt(Carbon::now())) {
             return redirect()->route('terminal.index')->with('error', 'Заявка уже  рассматривается');
