@@ -30,7 +30,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <form method="POST" action="{{ route('terminal.verify', $verifyDoc) }}" class="js-verify-doc">
+                            <form method="POST" action="{{ route('terminal.verify', $verifyDoc) }}"
+                                  class="js-verify-doc">
                                 @csrf
 
                                 <div class="form-group">
@@ -59,7 +60,8 @@
                                                 <label>{{ trans("fields.$name") }}</label>
                                                 <input type="date" class="form-control"
                                                        {{ $verifyDoc->is_verified ? 'disabled' : null }}
-                                                       name="{{ $name }}" value="{{ \Carbon\Carbon::parse($value)->format('Y-m-d') }}">
+                                                       name="{{ $name }}"
+                                                       value="{{ \Carbon\Carbon::parse($value)->format('Y-m-d') }}">
                                             </div>
                                             @break
                                             @case('Birthdate')
@@ -67,7 +69,8 @@
                                                 <label>{{ trans("fields.$name") }}</label>
                                                 <input type="date" class="form-control"
                                                        {{ $verifyDoc->is_verified ? 'disabled' : null }}
-                                                       name="{{ $name }}" value="{{ \Carbon\Carbon::parse($value)->format('Y-m-d') }}">
+                                                       name="{{ $name }}"
+                                                       value="{{ \Carbon\Carbon::parse($value)->format('Y-m-d') }}">
                                             </div>
                                             @break
                                             @case('SexID')
@@ -116,10 +119,6 @@
                                             </div>
                                             @break
                                         @endswitch
-                                    @else
-                                        <input type="hidden" class="form-control"
-                                               {{ $verifyDoc->is_verified ? 'disabled' : null }}
-                                               name="{{ $name }}" value="{{ $value }}">
                                     @endif
                                 @endforeach
 
