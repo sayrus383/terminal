@@ -86,6 +86,8 @@ class TerminalService
                 'reg_number' => $regNumber
             ]);
 
+            Log::info('Получено данные: ', $doc);
+
             return VerifyDoc::create([
                 'reg_number'    => $doc->reg_number,
                 'document_type' => $doc->document_type,
@@ -98,6 +100,7 @@ class TerminalService
 
     public function verifyDoc(VerifyDoc $verifyDoc)
     {
+        Log::info('Отправлено на верификацию: ', $verifyDoc->data);
         return $this->send('insurance/api/set-verify-doc', [
             'success'    => true,
             'reg_number' => $verifyDoc->reg_number,
