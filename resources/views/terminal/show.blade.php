@@ -61,7 +61,8 @@
                                                 <input type="date" class="form-control"
                                                        {{ $verifyDoc->is_verified ? 'disabled' : null }}
                                                        name="{{ $name }}"
-                                                       value="{{ date('d.m.Y', strtotime($value)) }}">
+                                                       required
+                                                       value="{{ $value ? \Carbon\Carbon::parse($value)->format('Y-m-d') : null }}">
                                             </div>
                                             @break
                                             @case('Birthdate')
@@ -70,13 +71,14 @@
                                                 <input type="date" class="form-control"
                                                        {{ $verifyDoc->is_verified ? 'disabled' : null }}
                                                        name="{{ $name }}"
-                                                       value="{{ date('d.m.Y', strtotime($value)) }}">
+                                                       required
+                                                       value="{{ $value ? \Carbon\Carbon::parse($value)->format('Y-m-d') : null }}">
                                             </div>
                                             @break
                                             @case('SexID')
                                             <div class="form-group">
                                                 <label>{{ trans("fields.$name") }}</label>
-                                                <select class="form-control" name="{{ $name }}">
+                                                <select class="form-control" name="{{ $name }}" required>
                                                     <option {{ $value == 1 ? 'selected' : null }} value="1">Мужской
                                                     </option>
                                                     <option {{ $value == 2 ? 'selected' : null }} value="2">Женский
@@ -87,7 +89,7 @@
                                             @case('Type')
                                             <div class="form-group">
                                                 <label>{{ trans("fields.$name") }}</label>
-                                                <select class="form-control" name="{{ $name }}">
+                                                <select class="form-control" name="{{ $name }}" required>
                                                     @foreach($tfTypes as $tfType)
                                                         <option
                                                             {{ $value == $tfType->id ? 'selected' : null }} value="{{ $tfType->id }}">
@@ -100,7 +102,7 @@
                                             @case('CountryID')
                                             <div class="form-group">
                                                 <label>{{ trans("fields.$name") }}</label>
-                                                <select class="form-control" name="{{ $name }}">
+                                                <select class="form-control" name="{{ $name }}" required>
                                                     @foreach($countries as $country)
                                                         <option
                                                             {{ $value == $country->id ? 'selected' : null }} value="{{ $country->id }}">
@@ -115,6 +117,7 @@
                                                 <label>{{ trans("fields.$name") }}</label>
                                                 <input type="text" class="form-control"
                                                        {{ $verifyDoc->is_verified ? 'disabled' : null }}
+                                                       required
                                                        name="{{ $name }}" value="{{ $value }}">
                                             </div>
                                             @break
