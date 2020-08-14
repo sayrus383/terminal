@@ -127,13 +127,4 @@ class TerminalService
 
         return "/storage/$destination/" . $imageName;
     }
-
-    public static function dateOrNow($date)
-    {
-        try {
-            return Carbon::parse($date);
-        } catch (\Exception $exception) {
-            return Carbon::now();
-        }
-    }
 }

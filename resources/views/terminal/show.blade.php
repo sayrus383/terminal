@@ -61,7 +61,7 @@
                                                 <input type="date" class="form-control"
                                                        {{ $verifyDoc->is_verified ? 'disabled' : null }}
                                                        name="{{ $name }}"
-                                                       value="{{ \App\Services\TerminalService::dateOrNow($value)->format('Y-m-d') }}">
+                                                       value="{{ date('d.m.Y', strtotime($value)) }}">
                                             </div>
                                             @break
                                             @case('Birthdate')
@@ -70,7 +70,7 @@
                                                 <input type="date" class="form-control"
                                                        {{ $verifyDoc->is_verified ? 'disabled' : null }}
                                                        name="{{ $name }}"
-                                                       value="{{ \App\Services\TerminalService::dateOrNow($value)->format('Y-m-d') }}">
+                                                       value="{{ date('d.m.Y', strtotime($value)) }}">
                                             </div>
                                             @break
                                             @case('SexID')
