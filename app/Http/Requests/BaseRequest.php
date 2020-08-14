@@ -9,8 +9,6 @@ class BaseRequest extends FormRequest
 {
     protected function prepareForValidation(): void
     {
-        $this->merge($this->verifyDoc->data);
-
         if ($this->input('IssueDate', null) !== null) {
             $this->merge([
                 'IssueDate' => Carbon::parse($this->input('IssueDate'))->format('d.m.Y')

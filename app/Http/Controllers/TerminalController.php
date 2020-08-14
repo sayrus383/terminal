@@ -71,7 +71,7 @@ class TerminalController extends Controller
         DB::beginTransaction();
 
         $verifyDoc->update([
-            'data'        => $request->except('_token'),
+            'data'        => array_merge($verifyDoc->data, $request->except('_token')),
             'verified_at' => Carbon::now(),
             'is_verified' => true,
             'manager_id'  => auth()->id()
