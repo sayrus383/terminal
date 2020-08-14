@@ -92,7 +92,6 @@ class TerminalService
                 'reg_number'    => $doc->reg_number,
                 'document_type' => $doc->document_type,
                 'data'          => $doc->data,
-                'created_at'    => Carbon::parse($doc->created_at),
                 'image_path'    => $this->saveBase64($doc->doc_base64)
             ]);
         });
