@@ -65,4 +65,5 @@
 
     <input type="hidden" value="{{ $channelVerifyDoc }}" id="channelVerifyDoc">
     <input type="hidden" value="{{ $channelOpen }}" id="channelOpen">
+    <input type="hidden" value="{{ $channelDelete }}" id="channelDelete">
 @endsection

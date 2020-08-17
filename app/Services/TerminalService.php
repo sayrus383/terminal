@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Notifications\PusherX;
 use App\VerifyDoc;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -99,7 +100,10 @@ class TerminalService
 
     public function verifyDoc(VerifyDoc $verifyDoc)
     {
-        Log::info('Отправлено: ' . json_encode($verifyDoc->data));
+        auth()->user()->notify(new PusherX('channelDelete', [
+            "reg_number" => $verifyDoc->reg_number,
+        ]));
+
         return $this->send('insurance/api/set-verify-doc', [
             'success'    => true,
             'reg_number' => $verifyDoc->reg_number,
@@ -110,6 +114,10 @@ class TerminalService
 
     public function refuseDoc(VerifyDoc $verifyDoc, $comment = null)
     {
+        auth()->user()->notify(new PusherX('channelDelete', [
+            "reg_number" => $verifyDoc->reg_number,
+        ]));
+
         return $this->send('insurance/api/set-verify-doc', [
             'success'    => false,
             'reg_number' => $verifyDoc->reg_number,

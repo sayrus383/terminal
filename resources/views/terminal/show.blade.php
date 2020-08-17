@@ -22,14 +22,14 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="image-zoom">
                                 <img id="image" src="{{ $verifyDoc->image_path }}" class="img-fluid"
                                      alt="Responsive image">
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <form method="POST" action="{{ route('terminal.verify', $verifyDoc) }}"
                                   class="js-verify-doc">
                                 @csrf

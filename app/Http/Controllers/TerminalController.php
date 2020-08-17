@@ -26,15 +26,16 @@ class TerminalController extends Controller
 
     public function index(Request $request)
     {
-        $channelVerifyDoc = $this->wsChannel('channelVerifyDoc' . auth()->id(), false);
-        $channelOpen = $this->wsChannel('channelOpen' . auth()->id(), false);
+        $channelVerifyDoc = $this->wsChannel('channelVerifyDoc', false);
+        $channelOpen = $this->wsChannel('channelOpen', false);
+        $channelDelete = $this->wsChannel('channelDelete', false);
         $docs = $this->terminalService->getVerifyDocs($request);
 
         $attachVerifyDocs = VerifyDoc::whereNotNull('attached_at')
             ->where('attached_at', '>=', Carbon::now())
             ->select('reg_number')->pluck('reg_number')->toArray();
 
-        return view('terminal.index', compact('docs', 'channelOpen', 'channelVerifyDoc', 'attachVerifyDocs'));
+        return view('terminal.index', compact('docs', 'channelOpen', 'channelVerifyDoc', 'attachVerifyDocs', 'channelDelete'));
     }
 
     public function show($regNumber)
@@ -43,13 +44,9 @@ class TerminalController extends Controller
         $tfTypes = TfType::all();
         $countries = Country::all();
 
-        $users = User::all();
-
-        foreach ($users as $user) {
-            $user->notify(new PusherX('channelOpen' . auth()->id(), [
-                "reg_number" => $verifyDoc->reg_number,
-            ]));
-        }
+        auth()->user()->notify(new PusherX('channelOpen', [
+            "reg_number" => $verifyDoc->reg_number,
+        ]));
 
         if ($verifyDoc->attached_at && $verifyDoc->attached_at->gt(Carbon::now())) {
             return redirect()->route('terminal.index')->with('error', 'Заявка уже  рассматривается');

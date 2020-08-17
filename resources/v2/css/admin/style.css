@@ -30193,3 +30193,7 @@ body {
 .main-panel {
     max-width: 100%;
 }
+
+#image {
+    opacity: 0;
+}

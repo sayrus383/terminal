@@ -191,5 +191,14 @@
                 });
             });
         }
+
+        let channelDelete = $('#channelDelete');
+        if (channelDelete.length) {
+            webSocket().then(socket => {
+                socket.on(channelDelete.val(), verifyDoc => {
+                    $('#open-' + verifyDoc.reg_number).parent().parent().remove();
+                });
+            });
+        }
     });
 })(jQuery)
